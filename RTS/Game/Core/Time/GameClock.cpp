@@ -3,7 +3,7 @@
 #include "Date.h"
 #include <SFML/Graphics.hpp>
 
-void GameClock::SateDate(const Date & date)
+void GameClock::SetDate(const Date & date)
 {
 	this->date->SetDate(date);
 }
@@ -12,6 +12,8 @@ void GameClock::Initialize()
 {
 	speed = ClockSpeed::Fifht;
 	date = std::make_unique<Date>(1, 1, 1000);
+	actualMonth = date->GetMonth();
+	actualYear = date->GetYear();
 	fontManger = &*FontManager::GetInstance();
 	font = &* fontManger->LoadResouce("default", "Font.ttf");
 
@@ -27,10 +29,34 @@ void GameClock::Initialize()
 
 void GameClock::Update(float delta)
 {
+	if (isNextDay == true)
+	{
+		isNextDay = false;
+	}
+	if (isNextMonth == true)
+	{
+		isNextMonth = false;
+	}
+	if (isNextYear == true)
+	{
+		isNextYear = false;
+	}
+
 	delay -= delta;
 	if (delay <= 0)
 	{
 		NextDay();
+		isNextDay = true;
+		if (actualMonth != date->GetMonth())
+		{
+			actualMonth = date->GetMonth();
+			isNextMonth = true;
+		}
+		if (actualYear != date->GetYear())
+		{
+			actualYear = date->GetYear();
+			isNextYear = true;
+		}
 	}
 }
 
@@ -85,6 +111,7 @@ void GameClock::NextDay()
 	}
 	}
 	//todo: Add that after 30/31 day set day to 1 and change month
-	date->SetDay(date->GetDay() + 1);
+	date->UpdateDate(1);
+
 	dateText->setString(date->ToWithMonthsString());
 }

@@ -28,30 +28,31 @@ public:
 
 	void SetDate(int day, int month, int year);
 	void SetDate(const Date& date);
-	static bool IsEqual(const Date& date1, const Date& date2) noexcept;
 
-	int GetDay() noexcept
+	void UpdateDate(int days) noexcept;
+
+	FORCEINLINE int GetDay() noexcept
 	{
 		return day;
 	}
-	int GetMonth() noexcept
+	FORCEINLINE int GetMonth() noexcept
 	{
 		return month;
 	}
-	int GetYear() noexcept
+	FORCEINLINE int GetYear() noexcept
 	{
 		return year;
 	}
 
-	void SetDay(int _day) noexcept
+	FORCEINLINE void SetDay(int _day) noexcept
 	{
 		day = _day;
 	}
-	void SetMonth(int _month) noexcept
+	FORCEINLINE void SetMonth(int _month) noexcept
 	{
 		month = _month;
 	}
-	void SetYear(int _year) noexcept
+	FORCEINLINE void SetYear(int _year) noexcept
 	{
 		year = _year;
 	}

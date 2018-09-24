@@ -4,11 +4,18 @@
 
 #define FORCEINLINE __forceinline
 
+#ifdef _DEBUG
+
 template<typename T>
 FORCEINLINE void Log(const T& t)
 {
 	std::cout << t << "\n";
 }
+#else
+template<typename T>
+FORCEINLINE void Log(const T& t) {}
+
+#endif // _DEBUG
 
 template<typename T>
 using UniquePtr = std::unique_ptr<T>;

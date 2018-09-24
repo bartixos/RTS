@@ -29,13 +29,18 @@ class GameClock : public ASingleton<GameClock>
 	UniquePtr<sf::Text> dateText;
 	ClockSpeed speed;
 	FontManager * fontManger;
+	static inline bool isNextDay = false;
+	static inline bool isNextMonth = false;
+	static inline bool isNextYear = false;
 
+	int actualMonth = 0;
+	int actualYear = 0;
 	const float speed1delay = 2.f, speed2delay = 1.5f, speed3delay = 1.f, speed4delay = 0.5f, speed5delay = .25f;
 	float delay;
 
 	void NextDay();
 public:
-	void SateDate(const Date& date);
+	void SetDate(const Date& date);
 
 	ClockSpeed GetClockSpeed() const noexcept { return speed; }
 	const Date& GetDate() const noexcept
