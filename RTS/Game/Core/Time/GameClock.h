@@ -28,6 +28,7 @@ class GameClock : public ASingleton<GameClock>
 	sf::Font * font;
 	UniquePtr<sf::Text> dateText;
 	ClockSpeed speed;
+	ClockSpeed speedBeforePause;
 	FontManager * fontManger;
 	static inline bool isNextDay = false;
 	static inline bool isNextMonth = false;
@@ -41,7 +42,10 @@ class GameClock : public ASingleton<GameClock>
 	void NextDay();
 public:
 	void SetDate(const Date& date);
-
+	void SetSpeedUp() noexcept;
+	void SetSpeedDown() noexcept;
+	void SetPause() noexcept;
+	std::string GetSpeedLvByString() noexcept;
 	ClockSpeed GetClockSpeed() const noexcept { return speed; }
 	const Date& GetDate() const noexcept
 	{

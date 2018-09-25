@@ -57,6 +57,22 @@ int main()
 			{
 				window->close();
 			}
+
+			if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::P)
+			{
+				clock->SetSpeedUp();
+				Log("Speed UP to: " + clock->GetSpeedLvByString());
+			}
+			if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::O)
+			{
+				clock->SetSpeedDown();
+				Log("Speed UP to: " + clock->GetSpeedLvByString());
+			}
+			if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space)
+			{
+				clock->SetPause();
+				Log("Speed UP to: " + clock->GetSpeedLvByString());
+			}
 		}
 		gameTimer->UpdateElapsedTime();
 		fpsCounter->Update();
