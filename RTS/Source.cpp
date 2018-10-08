@@ -6,6 +6,8 @@
 #include "Core/GameTimer.h"
 #include "Game/Core/Time/Date.h"
 #include "Game/Core/Time/GameClock.h"
+#include "Core/ResourcesManager/WindowManager.h"
+#include "Core/Math/Vector2.h"
 int main()
 {
 	/*{
@@ -27,9 +29,21 @@ int main()
 		}
 		load.close();
 	}*/
+	{
+		sf::Vector2f vec(20, 50);
+		Vector2 vector(vec);
+		Log(vector.GetVectorToString());
 
-	sf::RenderWindow * window = new sf::RenderWindow(sf::VideoMode(800, 600), "Random Title");
+		sf::Vector2i veci = static_cast<sf::Vector2i>(vector);
+		Log(vector.GetVectorToString());
+	}
 
+	auto windowManager = WindowManager::GetInstance();
+
+	Log(sizeof(Vector2));
+
+	sf::RenderWindow * window = windowManager->CreateWindow();
+	window->setFramerateLimit(60);
 	sf::Event event;
 
 	auto fpsCounter = FpsCounter::GetInstance();
@@ -74,6 +88,7 @@ int main()
 				Log("Speed UP to: " + clock->GetSpeedLvByString());
 			}
 		}
+
 		gameTimer->UpdateElapsedTime();
 		fpsCounter->Update();
 
@@ -87,9 +102,6 @@ int main()
 		clock->Draw(*window);
 		window->display();
 	}
-
-	delete window;
-	window = nullptr;
 
 	return 0;
 }

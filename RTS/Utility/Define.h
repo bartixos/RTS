@@ -4,7 +4,7 @@
 
 #define FORCEINLINE __forceinline
 
-#ifdef _DEBUG
+#ifndef _DEBUG
 
 template<typename T>
 FORCEINLINE void Log(const T& t)
